@@ -10,7 +10,7 @@ function handler(e) {
     inputval = e.target.value;
     console.log(inputval);
     fetch("https://voterapi.woodlandstech.org/getVoters?LastNAme=" + inputval,
-    {mode: 'cors'}).finally(function(test){
+    {mode: 'no-cors'}).finally(function(test){
         console.log(test)
     });
     console.log('The link was clicked.');
