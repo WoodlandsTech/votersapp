@@ -11,7 +11,6 @@ function handler(e) {
     console.log(inputval);
     fetch("https://voterapi.woodlandstech.org/getVoters?LastName=" + inputval,
     {mode: 'cors'}).finally(function(test){
-        alert(text);
         console.log(test)
     });
     console.log('The link was clicked.');
