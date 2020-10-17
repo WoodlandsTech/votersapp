@@ -9,7 +9,7 @@ function handler(e) {
 
     inputval = e.target.value;
     console.log(inputval);
-    fetch("https://voterapi.woodlandstech.org/getVoters?LastNAme=" + inputval,
+    fetch("https://voterapi.woodlandstech.org/getVoters?LastName=" + inputval,
     {mode: 'cors'}).finally(function(test){
         console.log(test)
     });
