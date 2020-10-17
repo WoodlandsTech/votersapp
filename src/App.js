@@ -1,23 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import SearchVoters from './SearchVoters.js';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Absentee and Early Voter Record Search 2020</h1>
+        <h2>Montgomery County, TX</h2>
+        <h3>Enter your last name to make sure your vote counted!</h3>
+          <SearchVoters></SearchVoters>
+
       </header>
     </div>
   );
