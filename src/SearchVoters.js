@@ -36,8 +36,16 @@ const SearchWorker = () => {
     setLastName(value);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+  };
+
   return (
-    <form noValidate autoComplete="off">
+    <form
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
       <Typography variant="h6" align="center">
         Enter your
         <TextField
