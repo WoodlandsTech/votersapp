@@ -1,34 +1,55 @@
-import React  from 'react';
-import './App.css';
+import React, { useEffect, useRef, useState } from 'react';
+import { TextField, Typography } from '@material-ui/core';
 
-export var inputval;
+let debounceHandler = null;
 
-function handler(e) {
-    
-    e.preventDefault();
+const SearchWorker = () => {
+  const [lastname, setLastName] = useState('');
 
-    inputval = e.target.value;
-    console.log(inputval);
-    fetch("https://voterapi.woodlandstech.org/getVoters?LastName=" + inputval,
-    {mode: 'cors'}).finally(function(test){
-        console.log(test)
-    });
-    console.log('The link was clicked.');
+  const didMount = useRef(false);
 
-    return inputval;
-}
-function SearchWorker(inputval) {
-    var thistring = '';
-    if (typeof inputval == 'string') {
-        thistring = inputval;
-        console.log(thistring)
+  const fetchData = (input) => {
+    if (input !== '') {
+      fetch(`https://voterapi.woodlandstech.org/getVoters?LastName=${input}`, { mode: 'cors' })
+        .then(response => response.json())
+        .then(data => console.log(data));
     }
-    return (
-            <p>
-            <input className="Search-input" type="text" value={inputval.value} name="LastName"  onChange={handler} />
+  }
 
-            </p>
-    );  
+  useEffect(() => {
+    if (didMount.current) {
+      debounceHandler = setTimeout(() => {
+        fetchData(lastname);
+      }, 1000);
+
+      return () => {
+        clearTimeout(debounceHandler);
+      };
+    } else {
+      didMount.current = true;
+    }
+  }, [lastname]);
+
+  const handleChange = ({
+    target: { value }
+  }) => {
+    setLastName(value);
+  };
+
+  return (
+    <form noValidate autoComplete="off">
+      <Typography variant="h6" align="center">
+        Enter your
+        <TextField
+          id="last-name"
+          label="last name"
+          value={lastname}
+          onChange={handleChange}
+        />
+        to make sure your 2020 vote has been counted in Montgomery County, TX
+      </Typography>
+    </form>
+  );
 }
 
 export default SearchWorker;

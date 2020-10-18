@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import WebFont from 'webfontloader';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@material-ui/core/styles';
 import App from './App';
+import theme from './theme';
 import * as serviceWorker from './serviceWorker';
 
+WebFont.load({
+  google: {
+    families: ['Roboto:300,400,500,700', 'sans-serif']
+  }
+});
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <StrictMode>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  </StrictMode>,
+  document.querySelector('#root'),
 );
 
 // If you want your app to work offline and load faster, you can change
