@@ -8,7 +8,7 @@ import ListVoters from './ListVoters';
 const App = () => {
   return (
     <RecordProvider>
-      <Container maxWidth="sm">
+      <Container>
         <SearchVoters />
         <ListVoters />
       </Container>
