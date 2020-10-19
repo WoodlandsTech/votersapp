@@ -1,27 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { TextField, Typography } from '@material-ui/core';
+
+import { RecordContext } from './Context'
 
 let debounceHandler = null;
 
-const SearchWorker = () => {
+const SearchVoters = () => {
+  // TODO: use loading propery of state in this component?
+  // eslint-disable-next-line no-unused-vars
+  const [state, dispatch] = useContext(RecordContext);
   const [voter, setVoter] = useState({ firstname: '', lastname: '' });
   const { firstname, lastname } = voter
 
   const didMount = useRef(false);
 
-  const fetchData = (input) => {
-    if (input !== '') {
-      const url = `https://voterapi.woodlandstech.org/getVoters?LastName=${input.toUpperCase()}`
-      fetch(url, { mode: 'cors' })
-        .then(response => response.json())
-        .then(data => console.log(data));
-    }
-  }
-
   useEffect(() => {
     if (didMount.current) {
       debounceHandler = setTimeout(() => {
-        fetchData(lastname);
+        if (lastname !== '') {
+          dispatch({ type: "LOADING_RECORDS" })
+          const url = `https://voterapi.woodlandstech.org/getVoters?LastName=${lastname.toUpperCase()}`
+          fetch(url, { mode: 'cors' })
+            .then(response => response.json())
+            .then(data => dispatch({ type: "SET_RECORDS", payload: data }))
+            .then(() => dispatch({ type: "LOADED_RECORDS" }))
+        }
       }, 1000);
 
       return () => {
@@ -30,7 +33,7 @@ const SearchWorker = () => {
     } else {
       didMount.current = true;
     }
-  }, [lastname]);
+  }, [lastname, dispatch]);
 
   const handleChange = ({
     target: { name, value }
@@ -71,4 +74,4 @@ const SearchWorker = () => {
   );
 }
 
-export default SearchWorker;
+export default SearchVoters;

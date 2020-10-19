@@ -1,13 +1,18 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 
-import SearchVoters from './SearchVoters.js';
+import { RecordProvider } from './Context';
+import SearchVoters from './SearchVoters';
+import ListVoters from './ListVoters';
 
 const App = () => {
   return (
-    <Container maxWidth="sm">
-      <SearchVoters />
-    </Container>
+    <RecordProvider>
+      <Container maxWidth="sm">
+        <SearchVoters />
+        <ListVoters />
+      </Container>
+    </RecordProvider>
   );
 };
 
