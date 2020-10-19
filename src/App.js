@@ -11,16 +11,18 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     minHeight: '100vh',
   },
+  header: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(2),
+  },
   main: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
+    padding: theme.spacing(2)
   },
   footer: {
-    padding: theme.spacing(3, 2),
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(2),
     marginTop: 'auto',
     textAlign: 'center',
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
   },
 }));
 
@@ -29,10 +31,18 @@ const App = () => {
   return (
     <RecordProvider>
       <div className={classes.root}>
-        <Container>
+        <header className={classes.header}>
+          <Typography component="h1" variant="h4" align="center" gutterBottom>
+            Voter Record Search 2020
+          </Typography>
+          <Typography component="h2" variant="h5" align="center">
+            Montgomery County, TX
+          </Typography>
+        </header>
+        <main className={classes.main}>
           <SearchVoters />
           <ListVoters />
-        </Container>
+        </main>
         <footer className={classes.footer}>
           <Container>
             <Typography variant="body1" color="textSecondary">
@@ -45,7 +55,7 @@ const App = () => {
           </Container>
         </footer>
       </div>
-    </RecordProvider>
+    </RecordProvider >
   );
 };
 

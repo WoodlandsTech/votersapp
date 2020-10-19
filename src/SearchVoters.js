@@ -1,14 +1,20 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { TextField, Typography } from '@material-ui/core';
+import { Container, Grid, makeStyles, TextField, Typography } from '@material-ui/core';
 
 import { RecordContext } from './Context'
+
+const useStyles = makeStyles((theme) => ({
+  question: {
+    paddingTop: '10px',
+  },
+}));
 
 let debounceHandler = null;
 
 const SearchVoters = () => {
   const [state, dispatch] = useContext(RecordContext);
   const { firstName, lastName } = state.filter
-
+  const classes = useStyles();
   const didMount = useRef(false);
 
   useEffect(() => {
@@ -45,28 +51,43 @@ const SearchVoters = () => {
   };
 
   return (
-    <form
-      noValidate
-      autoComplete="off"
-      onSubmit={handleSubmit}
-    >
-      <Typography variant="h6" align="center">
-        Enter your
-        <TextField
-          name="firstName"
-          label="first name"
-          value={firstName}
-          onChange={handleChange}
-        />
-        <TextField
-          name="lastName"
-          label="last name"
-          value={lastName}
-          onChange={handleChange}
-        />
-        to make sure your 2020 vote has been counted in Montgomery County, TX
-      </Typography>
-    </form>
+    <Container>
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+        <Grid container spacing={2} justify="center" alignItems="center">
+          <Grid item>
+            <Typography component="h3" variant="h6" className={classes.question}>{`Enter your `}</Typography>
+          </Grid>
+          <Grid item>
+            <TextField
+              name="firstName"
+              label="first"
+              value={firstName}
+              onChange={handleChange}
+              size="small"
+            />
+          </Grid>
+          <Grid item>
+            <Typography component="h3" variant="h6" className={classes.question}>{` & `}</Typography>
+          </Grid>
+          <Grid item>
+            <TextField
+              name="lastName"
+              label="last"
+              value={lastName}
+              onChange={handleChange}
+              size="small"
+            />
+          </Grid>
+          <Grid item>
+            <Typography component="h3" variant="h6" className={classes.question}>{` name to make sure your vote has been counted`}</Typography>
+          </Grid>
+        </Grid>
+      </form>
+    </Container >
   );
 }
 
