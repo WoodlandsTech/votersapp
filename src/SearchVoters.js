@@ -4,13 +4,15 @@ import { TextField, Typography } from '@material-ui/core';
 let debounceHandler = null;
 
 const SearchWorker = () => {
-  const [lastname, setLastName] = useState('');
+  const [voter, setVoter] = useState({ firstname: '', lastname: '' });
+  const { firstname, lastname } = voter
 
   const didMount = useRef(false);
 
   const fetchData = (input) => {
     if (input !== '') {
-      fetch(`https://voterapi.woodlandstech.org/getVoters?LastName=${input}`, { mode: 'cors' })
+      const url = `https://voterapi.woodlandstech.org/getVoters?LastName=${input.toUpperCase()}`
+      fetch(url, { mode: 'cors' })
         .then(response => response.json())
         .then(data => console.log(data));
     }
@@ -31,13 +33,16 @@ const SearchWorker = () => {
   }, [lastname]);
 
   const handleChange = ({
-    target: { value }
+    target: { name, value }
   }) => {
-    setLastName(value);
+    const updatedVoter = { ...voter }
+    updatedVoter[name] = value
+    setVoter(updatedVoter);
+    console.log(updatedVoter);
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
   };
 
   return (
@@ -49,7 +54,13 @@ const SearchWorker = () => {
       <Typography variant="h6" align="center">
         Enter your
         <TextField
-          id="last-name"
+          name="firstname"
+          label="first name"
+          value={firstname}
+          onChange={handleChange}
+        />
+        <TextField
+          name="lastname"
           label="last name"
           value={lastname}
           onChange={handleChange}
