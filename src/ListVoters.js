@@ -44,21 +44,28 @@ const ListVoters = () => {
           FirstName,
           MiddleName,
           LastName,
+          MailAddress,
+          Residence_City,
+          Residence_State,
           Certificate_Number,
           Election_Name,
-          DateVoted
+          DateVoted,
+          VoteType,
         }) => (
             <Grid item key={Certificate_Number + Election_Name} xs={12} sm={6} md={6}>
               <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
-                  <Typography component="h5" variant="h6">
+                  <Typography component="h4" variant="h6">
                     {Election_Name}
                   </Typography>
-                  <Typography component="h5" variant="h6">
+                  <Typography variant="body1">
                     {`${FirstName} ${MiddleName} ${LastName}`}
                   </Typography>
                   <Typography variant="subtitle1" color="textSecondary">
-                    {DateVoted}
+                    {`${MailAddress} ${Residence_City}, ${Residence_State}`}
+                  </Typography>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    {VoteType === 'A' ? 'Voted Absentee by Mail' : 'Voted In Person'} {DateVoted}
                   </Typography>
                 </CardContent>
               </Card>
