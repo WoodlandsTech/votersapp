@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Grid, makeStyles, Link, Typography } from '@material-ui/core';
+import Contributors from './Contributors';
 
 const Moco = require('./images/moco_logo.png');
 const Wase = require('./images/wase_logo.png');
@@ -51,6 +52,7 @@ const FootText = () => {
                 </Link>
 			</Typography>
 			<Typography variant="body2">Not responsible for accuracy of data. Use with caution.</Typography>
+
 		</div>
 	)
 }
@@ -61,7 +63,7 @@ const Footer = () => {
 	return (
 		<footer className={classes.footer}>
 			<Container>
-				<Grid container spacing={8}>
+				<Grid container spacing={6}>
 					<Grid item >
 						<MocoLogo />
 					</Grid>
@@ -70,6 +72,9 @@ const Footer = () => {
 					</Grid>
 					<Grid item >
 						<WaseLogo />
+					</Grid>
+					<Grid item >
+						<Contributors />
 					</Grid>
 				</Grid>
 			</Container>
