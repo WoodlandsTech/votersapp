@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, Grid, makeStyles, Link, Typography } from '@material-ui/core';
-import Contributors from "./Contributors";
 
 const Moco = require('./images/moco_logo.png');
 const Wase = require('./images/wase_logo.jpeg');
@@ -42,28 +41,6 @@ const MocoLogo = () => {
 		</div>
 	)
 }
-//var contributors =  ["Contributors to the", "Montgomery County", "Voter Record Search", "are\nRudayrd Merriam", "Crazy Russian", " Keving"];
-//
-//const showContributors = () => {
-//		alert(contributors)
-//
-//};
-
-const Contributed = () => {
-	return (
-		<div>
-				<button onClick={this.togglePopup.bind(this)}> Click To Launch Popup</button>
-
-				{this.state.showPopup ?
-					<Contributors
-						text='Click "Close Button" to hide popup'
-						closePopup={this.togglePopup.bind(this)}
-					/>
-					: null
-				}
-			</div>
-	)
-}
 
 const FootText = () => {
 	return (
@@ -91,7 +68,6 @@ const Footer = () => {
 					</Grid>
 					<Grid item >
 						<FootText />
-						<Contributed />
 					</Grid>
 					<Grid item >
 						<WaseLogo />
