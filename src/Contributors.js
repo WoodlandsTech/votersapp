@@ -4,8 +4,8 @@ import React from 'react';
 //import Typography from '@material-ui/core/Typography';
 //import Button from '@material-ui/core/Button';
 
-import { Button, Typography, Popover, makeStyles } from '@material-ui/core';
-import { Divider, List, ListItemText, ListSubheader } from '@material-ui/core';
+import { Button, Popover, makeStyles } from '@material-ui/core';
+import { List, ListItemText, ListSubheader } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({

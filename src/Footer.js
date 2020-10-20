@@ -7,15 +7,24 @@ const Moco = require('./images/moco_logo.png');
 const Wase = require('./images/wase_logo.png');
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      display: 'inline-block',
-      verticalAlign: 'middle',
-    },
-  },
-  footerText: {
-    margin: '0 20px',
-  }
+	root: {
+		'& > *': {
+			display: 'inline-block',
+			verticalAlign: 'middle',
+		},
+	},
+
+	footer: {
+		backgroundColor: theme.palette.background.paper,
+		padding: theme.spacing(3, 0),
+		marginTop: 'auto',
+		textAlign: 'center',
+		width: '100%'
+	},
+
+	footerText: {
+		margin: '0 20px',
+	}
 }));
 
 const WaseLogo = () => {
@@ -54,8 +63,8 @@ const Footer = () => {
 
 	return (
 		<footer className={classes.footer}>
-			<Container>
-				<Grid container spacing={6}>
+			<Container >
+				<Grid container spacing={5}>
 					<Grid item >
 						<MocoLogo />
 					</Grid>
@@ -70,27 +79,31 @@ const Footer = () => {
 					</Grid>
 				</Grid>
 			</Container>
-		</footer >
+		</footer>
 	)
-{/*}
-const Footer = () => {
-  const classes = useStyles();
-  return (
-    <Container className={classes.root}>
-      <img src={Moco} alt="Montgomery County Logo" height="50" />
-      <div className={classes.footerText}>
-        <Typography variant="body1" >
-          Web site provided by&nbsp;
-              <Link color="inherit" href="https://www.meetup.com/Woodlands-Area-Software-Enthusiasts">
-            Woodlands Area Software Enthusiasts
-              </Link>
-        </Typography>
-        <Typography variant="body2">Not responsible for accuracy of data. Use with caution.</Typography>
-      </div>
-      <img src={Wase} alt="WASE Logo" height="50" />
-    </Container>
-  )
-*/}
+
+	/*	
+	const Footer = () => {
+	  const classes = useStyles();
+	  return (
+		<Container className={classes.root}>
+		  <img src={Moco} alt="Montgomery County Logo" height="50" />
+		  <div className={classes.footerText}>
+			<Typography variant="body1" >
+			  Web site provided by&nbsp;
+				  <Link color="inherit" href="https://www.meetup.com/Woodlands-Area-Software-Enthusiasts">
+				Woodlands Area Software Enthusiasts
+				  </Link>
+			</Typography>
+			<Typography variant="body2">Not responsible for accuracy of data. Use with caution.</Typography>
+		  </div>
+		  <img src={Wase} alt="WASE Logo" height="50" />
+							<Contributors />
+	
+		</Container>
+	  )
+	
+	*/
 };
 
 export default Footer;
