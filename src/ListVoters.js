@@ -52,6 +52,9 @@ const ListVoters = () => {
               <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
                   <Typography component="h5" variant="h6">
+                    {Election_Name}
+                  </Typography>
+                  <Typography component="h5" variant="h6">
                     {`${FirstName} ${MiddleName} ${LastName}`}
                   </Typography>
                   <Typography variant="subtitle1" color="textSecondary">

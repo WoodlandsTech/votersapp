@@ -1,5 +1,4 @@
 import React from 'react';
-//import { Container, makeStyles, Link, Typography } from '@material-ui/core';
 import { makeStyles, Typography } from '@material-ui/core';
 
 import { RecordProvider } from './Context';
@@ -33,8 +32,8 @@ const App = () => {
   const classes = useStyles();
   return (
     <RecordProvider>
-      <Loading />
       <div className={classes.root}>
+        <Loading />
         <header className={classes.header}>
           <Typography component="h1" variant="h4" align="center" gutterBottom>
             Voter Record Search 2020
@@ -47,7 +46,9 @@ const App = () => {
           <SearchVoters />
           <ListVoters />
         </main>
-        <Footer/>
+        <footer className={classes.footer}>
+          <Footer />
+        </footer>
       </div>
     </RecordProvider >
   );

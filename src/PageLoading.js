@@ -6,7 +6,6 @@ import { RecordContext } from './Context'
 const useStyles = makeStyles((theme) => ({
   placeholder: {
     height: '4px',
-    content: ' ',
   },
 }));
 
