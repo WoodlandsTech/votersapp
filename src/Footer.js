@@ -1,5 +1,7 @@
 import React from 'react';
 import { Container, Grid, makeStyles, Link, Typography } from '@material-ui/core';
+import Contributors from "./Contributors";
+
 const Moco = require('./images/moco_logo.png');
 const Wase = require('./images/wase_logo.jpeg');
 
@@ -25,23 +27,45 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function WaseLogo() {
+const WaseLogo = () => {
 	return (
 		<div >
-			<img src={Wase} alt="WASE Logo" width="142" height="80" />
+			<img src={Wase} alt="WASE Logo" width="219" height="80" margin-top="0" />
 		</div>
 	)
 }
 
-function MocoLogo() {
+const MocoLogo = () => {
 	return (
 		<div>
 			<img src={Moco} alt="Montgomery County Logo" width="250" height="50" />
 		</div>
 	)
 }
+//var contributors =  ["Contributors to the", "Montgomery County", "Voter Record Search", "are\nRudayrd Merriam", "Crazy Russian", " Keving"];
+//
+//const showContributors = () => {
+//		alert(contributors)
+//
+//};
 
-function FootText() {
+const Contributed = () => {
+	return (
+		<div>
+				<button onClick={this.togglePopup.bind(this)}> Click To Launch Popup</button>
+
+				{this.state.showPopup ?
+					<Contributors
+						text='Click "Close Button" to hide popup'
+						closePopup={this.togglePopup.bind(this)}
+					/>
+					: null
+				}
+			</div>
+	)
+}
+
+const FootText = () => {
 	return (
 		<div>
 			<Typography variant="body1" >
@@ -67,6 +91,7 @@ const Footer = () => {
 					</Grid>
 					<Grid item >
 						<FootText />
+						<Contributed />
 					</Grid>
 					<Grid item >
 						<WaseLogo />
