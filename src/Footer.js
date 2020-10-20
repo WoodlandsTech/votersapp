@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Grid, makeStyles, Link, Typography } from '@material-ui/core';
 
 const Moco = require('./images/moco_logo.png');
-const Wase = require('./images/wase_logo.jpeg');
+const Wase = require('./images/wase_logo.png');
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2),
 		marginTop: 'auto',
 		textAlign: 'center',
-		width: "90%"
 	},
 }));
 
@@ -46,7 +45,7 @@ const FootText = () => {
 	return (
 		<div>
 			<Typography variant="body1" >
-				'Web site provided by '
+				Web site provided by&nbsp;
 			<Link color="inherit" href="https://www.meetup.com/Woodlands-Area-Software-Enthusiasts">
 					Woodlands Area Software Enthusiasts
                 </Link>
