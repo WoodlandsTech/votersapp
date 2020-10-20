@@ -19,14 +19,17 @@ const SearchVoters = () => {
 
   useEffect(() => {
     if (didMount.current) {
+      dispatch({ type: "LOADING_RECORDS" })
       debounceHandler = setTimeout(() => {
         if (lastName !== '') {
-          dispatch({ type: "LOADING_RECORDS" })
           const url = `https://voterapi.woodlandstech.org/getVoters?LastName=${lastName.toUpperCase()}`
           fetch(url, { mode: 'cors' })
             .then(response => response.json())
             .then(data => dispatch({ type: "SET_RECORDS", payload: data }))
             .then(() => dispatch({ type: "LOADED_RECORDS" }))
+        } else {
+          dispatch({ type: "SET_RECORDS", payload: [] })
+          dispatch({ type: "LOADED_RECORDS" })
         }
       }, 1000);
 
