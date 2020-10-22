@@ -34,6 +34,7 @@ export default function Contributors() {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+	const Wase = require('./images/wase_logo.png');
 
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
@@ -41,8 +42,9 @@ export default function Contributors() {
 	return (
 		<div>
 			<Button variant="outlined" color="inherit" onClick={handleClick} className={classes.button}>
-				The Developers
-  			</Button>
+				Developed by&nbsp;
+				<img src={Wase} alt="WASE Logo" height="40" />
+			</Button>
 			<Popover
 				id={id}
 				open={open}
@@ -87,7 +89,7 @@ const PopupInner = () => {
 				Moral Support</ListSubheader>
 			<ListItemText inset='true' width={'200'}
 			>
-				Mikhail Kozorovitskiy&nbsp;&nbsp;&nbsp;&nbsp;</ListItemText> 
+				Mikhail Kozorovitskiy&nbsp;&nbsp;&nbsp;&nbsp;</ListItemText>
 		</List>
 	)
 }
