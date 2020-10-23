@@ -1,12 +1,12 @@
 import React from 'react';
-//import { makeStyles } from '@material-ui/core/styles';
-//import Popover from '@material-ui/core/Popover';
-//import Typography from '@material-ui/core/Typography';
-//import Button from '@material-ui/core/Button';
 
 import { Button, Popover, makeStyles } from '@material-ui/core';
 import { List, ListItemText, ListSubheader } from '@material-ui/core';
 
+//	Don't need logo here since it is in the header'	
+//	const Wase = require('./images/wase_logo.png');
+
+//	TODO: Rewrite into an About page
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -34,16 +34,15 @@ export default function Contributors() {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
-	const Wase = require('./images/wase_logo.png');
 
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
 
 	return (
-		<div>
+		<>
 			<Button variant="outlined" color="inherit" onClick={handleClick} className={classes.button}>
-				Developed by&nbsp;
-				<img src={Wase} alt="WASE Logo" height="40" />
+				About
+				{/* &nbsp;<img src={Wase} alt="WASE Logo" height="40" /> */}
 			</Button>
 			<Popover
 				id={id}
@@ -61,14 +60,18 @@ export default function Contributors() {
 			>
 				<PopupInner />
 			</Popover>
-		</div>
+		</>
 	);
 }
+
 const PopupInner = () => {
 	const classes = useStyles();
 
 	return (
 		<List dense="true" disablePadding='true'>
+			<ListSubheader classes={{ root: classes.listSubHeaderRoot }}>
+				Contributors
+			</ListSubheader>
 			<ListSubheader classes={{ root: classes.listSubHeaderRoot }}>
 				Concept</ListSubheader>
 			<ListItemText inset='true'>
@@ -87,8 +90,7 @@ const PopupInner = () => {
 				Robert McCutchen</ListItemText>
 			<ListSubheader classes={{ root: classes.listSubHeaderRoot }}>
 				Moral Support</ListSubheader>
-			<ListItemText inset='true' width={'200'}
-			>
+			<ListItemText inset='true' width={'200'}>
 				Mikhail Kozorovitskiy&nbsp;&nbsp;&nbsp;&nbsp;</ListItemText>
 		</List>
 	)

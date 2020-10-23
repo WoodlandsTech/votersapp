@@ -3,28 +3,27 @@ import { Card, CardContent, Container, Grid, makeStyles, Typography } from '@mat
 
 import { RecordContext } from './Context'
 
+//	TODO: Convert to class - for sure
+//	TODO: text for records not found - what to do if now getting results after few days
+//	TODO: probably need to handle voting fields similar to districts. Think 
+//			the actual vote might be recorded 
+
 const useStyles = makeStyles((theme) => ({
-	cardGrid: {
-//		paddingTop: theme.spacing(4),
-//		paddingBottom: theme.spacing(4),
-	},
+
 	card: {
 		height: '100%',
-		//		width: '90%',
-		//		display: 'flex',
-		//		flexDirection: 'column',
-		//		align: 'center',
 		textAlign: 'center',
-
+		padding: theme.spacing(2, 0),	// ned gap from top of card to name
+		margin: theme.spacing(1, 0),	// need gap betwee top of card and header
 	},
 	cardContent: {
 		align: 'center',
 		flexGrow: 1,
-		
+		padding: theme.spacing(0, 0)
 	},
-	typo: {
-		height: '2',
-		      fontSize: 12,
+	typography: {
+
+		//		padding: theme.spacing(0, 0)
 
 	}
 }));
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 const NoRecord = () => {
 	return (
 		<Grid item key="no-records-found" xs={12}>
-			<Typography component="h3" variant="h4" align="center">
+			<Typography  >
 				Records not found
 				<br /> Please check spelling and zip code are correct
 				<br /> If they are correct the information may not yet have been loaded to this site
@@ -42,45 +41,39 @@ const NoRecord = () => {
 	)
 }
 
-let elects = [];
+let districts = [];	// holds list of election districts
 
 const Elections = () => {
 	const classes = useStyles();
-	console.log(elects)
 	return (
-		elects.map((elect => (
+		districts.map((elect => (
 			<CardContent className={classes.cardContent}>
-				<Typography variant="body1" color="textSecondary" className={classes.typo}>
+				<Typography className={classes.typography}>
 					{elect}
 				</Typography>
 			</CardContent >
-		)
-		)
-		)
+		)))
 	)
 }
+
+// 	Called for each record for person 
+//	On each call only records the election district
+//	On the last call builds the person output and appends the list of election districts
 
 const Person = props => {
 	const classes = useStyles();
 
-	console.log(props.names, props.how_many)
-	let e = props.election
-	elects[props.pos.index] = e;
+	districts[props.pos.index] = props.election;
 
 	console.log(props.pos.index)
 	if (props.pos.index + 1 === props.how_many) {
 		return (
 			<Card className={classes.card}>
-
 				<CardContent className={classes.cardContent}>
 					<>
-						<Typography component="h4" variant="h6" >
-							{props.names}
-						</Typography>
-						<Typography variant="subtitle1" color="textSecondary" className={classes.typo}>
-							{props.street}
-						</Typography>
-						<Typography variant="subtitle1" color="textSecondary" className={classes.typo}>
+						<Typography variant="h5"> 						{props.names}	</Typography>
+						<Typography> 						{props.street} 	</Typography>
+						<Typography>
 							{props.city_state}
 							<br />
 							<br />
@@ -89,11 +82,8 @@ const Person = props => {
 							{props.vote_type}
 						</Typography>
 						<br />
-						<Typography component="h4" variant="h6" color="textSecondary">
-							Election Districts
-				</Typography>
-						<Elections />
-
+						<Typography variant="h6">	Election Districts	</Typography>
+						<Elections variant="subtitle2" />
 					</>
 				</CardContent>
 			</Card>
@@ -103,13 +93,19 @@ const Person = props => {
 		return null
 }
 
+let vote_types = new Map([
+	['A', 'Voted Absentee by Mail'],
+	['E', 'Voted Early In-Person'],
+	['L', 'Voted Early Limited Ballot In-Person'],
+	['E1', 'Late, Death in Family'],
+	['E3', 'Late, Disabled Representative'],
+])
+
 const ListVoters = () => {
-	const classes = useStyles();
 	const [state] = useContext(RecordContext);
-	const { loading, filter: { firstName, lastName, zipCode }, records } = state;
+	const { loading, loaded, filter: { firstName, lastName, zipCode }, records } = state;
 
 	if (loading) return null
-	console.log({ state })
 
 	const RecordsDisplay = () => {
 
@@ -133,7 +129,8 @@ const ListVoters = () => {
 							street={MailAddress}
 							city_state={Residence_City + ", " + Residence_State + ' ' + Residence_Zipcode}
 							date={DateVoted}
-							vote_type={VoteType === 'A' ? 'Voted Absentee by Mail' : 'Voted In Person'}
+							//							vote_type={VoteType === 'A' ? 'Voted Absentee by Mail' : 'Voted In Person'}
+							vote_type={vote_types.get(VoteType)}
 							election={Election_Name}
 							how_many={filteredRecords.length}
 						/>
@@ -144,26 +141,27 @@ const ListVoters = () => {
 	}
 
 	const filteredRecords = records.filter(voter => {
-		console.log({ firstName, lastName, zipCode })
-
-		console.log(voter.Residence_Zipcode === zipCode)
-		console.log(voter.LastName === lastName.toUpperCase())
-
-
 		if (zipCode !== voter.Residence_Zipcode) {
 			return false
 		}
 		else if (lastName.toUpperCase() !== voter.LastName) {
 			return false
 		}
-		console.log(voter.Election_Name, { voter })
 		return true
 	})
 
 	return (
-		<Container className={classes.cardGrid}>
-			{filteredRecords.length === 0 && firstName !== '' && lastName !== '' && zipCode.length !== 5 ? NoRecord() : RecordsDisplay()}
-			{console.log(elects, "#####################")}
+		<Container>
+			{
+				loaded === true &&
+				filteredRecords.length === 0 &&
+					firstName !== '' &&
+					lastName !== '' &&
+					zipCode.length === 5
+					?
+					NoRecord()
+					:
+					RecordsDisplay()}
 		</Container >
 	)
 }

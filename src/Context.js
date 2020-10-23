@@ -10,27 +10,25 @@ const initialState = {
 		zipCode: "",
 	},
 	loading: false,
-	error: null
+	error: null,
+	loaded: false,
 };
 
 const reducer = (state, action) => {
-	console.log(action.type)
 
 	switch (action.type) {
-		
 		case "SET_FILTER":
-			var v = { ...state, filter: action.payload }
-			return v;
-		
+			return { ...state ,  loaded: false, filter: action.payload }
+
 		case "SET_RECORDS":
 			return { ...state, records: action.payload };
-			
+
 		case "LOADING_RECORDS":
-			return { ...state, loading: true };
-		
+			return { ...state, loading: true};
+
 		case "LOADED_RECORDS":
-			return { ...state, loading: false };
-		
+			return { ...state, loading: false, loaded: true };
+
 		default:
 			throw new Error();
 	}
@@ -45,3 +43,4 @@ export const RecordProvider = props => {
 		</RecordContext.Provider>
 	);
 };
+

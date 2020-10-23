@@ -1,9 +1,7 @@
 import React from 'react';
 import { Container, makeStyles, Link, Typography } from '@material-ui/core';
-//import Contributors from './Contributors';
+import Contributors from './Contributors';
 
-const Moco = require('./images/moco_logo.png');
-const Wase = require('./images/wase_logo.png');
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -14,51 +12,17 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	footerText: {
-		margin: '0 20px',
-	},
-	header: {
-		backgroundColor: theme.palette.background.paper,
-		width: '100%',
-		height: '10rem',
-		marginTop: '0',
-	},
-	question: {
-		paddingBottom: '10px',
-		textAlign: 'center',
-
-	},
+	margin: '0 20px',
+},
 }));
 
+// TODO: Convert Button into a drawer as an 'about' 
+// TODO: add legal disclaimer about using voting information
 
-export const Header = () => {
-	const classes = useStyles();
-
-	return (
-		<>
-			<Container className={classes.root}>
-				<img src={Moco} alt="Montgomery County Logo" height="40" align="left" />
-
-				<div className={classes.footerText}>
-					<Typography variant="h4" align="center">
-						Ballot Record Search 2020
-			    	</Typography>
-				</div>
-				<img src={Wase} alt="WASE Logo" height="50" align="right" />
-
-			</Container>
-			<br />
-			<Typography component="h3" variant="h6" className={classes.question}>{`To check your ballot, please enter `}</Typography>
-		</>
-
-	)
-}
-//			<Contributors />
-
-export const Footer = () => {
+const Footer = () => {
 	const classes = useStyles();
 	return (
 		<Container className={classes.root}>
-
 			<div className={classes.footerText}>
 				<Typography variant="body1" >
 					Web site provided by&nbsp;
@@ -68,9 +32,9 @@ export const Footer = () => {
 				</Typography>
 				<Typography variant="body2">Not responsible for accuracy of data. Use with caution.</Typography>
 			</div>
-
+			<Contributors />
 		</Container>
 	)
 };
 
-
+export default Footer
