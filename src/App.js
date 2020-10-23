@@ -16,15 +16,14 @@ const useStyles = makeStyles((theme) => ({
 	header: {
 		backgroundColor: theme.palette.background.paper,
 		width: '100%',
-		height: '10rem',
 		marginTop: '0',
+		textAlign: 'center',
 	},
 	main: {
-		//		padding: theme.spacing(2, 0)
+		padding: theme.spacing(1, 0)
 	},
 	footer: {
 		backgroundColor: theme.palette.background.paper,
-		padding: theme.spacing(2, 0),
 		marginTop: 'auto',
 		textAlign: 'center',
 	},
@@ -36,7 +35,7 @@ const App = () => {
 		<RecordProvider>
 			<div className={classes.root}>
 				<Loading />
-				<header >
+				<header className={classes.header}>
 					<Header />
 				</header>
 
@@ -44,12 +43,10 @@ const App = () => {
 					<SearchVoters />
 					<ListVoters />
 				</main>
-				
-{/*
+
 				<footer className={classes.footer}>
 					<Footer />
 				</footer>
-*/}
 			</div>
 		</RecordProvider >
 	);

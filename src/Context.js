@@ -17,17 +17,20 @@ const reducer = (state, action) => {
 	console.log(action.type)
 
 	switch (action.type) {
+		
 		case "SET_FILTER":
 			var v = { ...state, filter: action.payload }
-			console.log(v)
-			console.log(action.payload)
 			return v;
+		
 		case "SET_RECORDS":
 			return { ...state, records: action.payload };
+			
 		case "LOADING_RECORDS":
 			return { ...state, loading: true };
+		
 		case "LOADED_RECORDS":
 			return { ...state, loading: false };
+		
 		default:
 			throw new Error();
 	}
